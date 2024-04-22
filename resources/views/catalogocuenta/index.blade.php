@@ -34,12 +34,11 @@
                             <table class="table table-striped table-hover">
                                 <thead class="thead">
                                     <tr>
-                                        <th>No</th>
-										<th>Cod.Cuenta</th>
-										<th>Nocuenta</th>
+                                        
+										<th>Cuenta</th>
+                                        <th>Nombrecuenta</th>
+                                        <th>Nivelcuenta</th>
 										<th>Ctadependiente</th>
-										<th>Nivelcuenta</th>
-										<th>Nombrecuenta</th>
 										<th>Movimientos</th>
 
                                         <th></th>
@@ -48,17 +47,14 @@
                                 <tbody>
                                     @foreach ($catalogocuentas as $catalogocuenta)
                                         <tr>
-                                            <td>{{ ++$i }}</td>
 											<td>{{ $catalogocuenta->n1 }}{{ $catalogocuenta->n2 }}{{ $catalogocuenta->n3 }}{{ $catalogocuenta->n4 }}{{ $catalogocuenta->n5 }}{{ $catalogocuenta->n6 }}{{ $catalogocuenta->n7 }}{{ $catalogocuenta->n8 }}</td>
-											<td>{{ $catalogocuenta->noCuenta }}</td>
-											<td>{{ $catalogocuenta->CTADependiente }}</td>
+                                            <td>{{ $catalogocuenta->nombreCuenta }}</td>
 											<td>{{ $catalogocuenta->nivelCuenta }}</td>
-											<td>{{ $catalogocuenta->nombreCuenta }}</td>
+                                            <td>{{ $catalogocuenta->CTADependiente}}</td>
 											<td>{{ $catalogocuenta->movimientos }}</td>
-
                                             <td>
                                                 <form action="{{ route('catalogocuentas.destroy',$catalogocuenta->id) }}" method="POST">
-                                                    <a class="btn btn-sm btn-primary " href="{{ route('catalogocuentas.show',$catalogocuenta->id) }}"><i class="fa fa-fw fa-eye"></i> {{ __('Show') }}</a>
+                                                    <a class="btn btn-sm btn-primary " href="{{ route('catalogocuentas.show',$catalogocuenta->id) }}"><i class="fa fa-fw fa-eye"></i> {{ __('Subcuentas') }}</a>
                                                     <a class="btn btn-sm btn-success" href="{{ route('catalogocuentas.edit',$catalogocuenta->id) }}"><i class="fa fa-fw fa-edit"></i> {{ __('Edit') }}</a>
                                                     @csrf
                                                     @method('DELETE')
