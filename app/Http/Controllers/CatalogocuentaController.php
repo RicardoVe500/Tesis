@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Catalogocuenta;
 use App\Http\Requests\CatalogocuentaRequest;
 
+
 /**
  * Class CatalogocuentaController
  * @package App\Http\Controllers
@@ -22,6 +23,7 @@ class CatalogocuentaController extends Controller
             ->with('i', (request()->input('page', 1) - 1) * $catalogocuentas->perPage());
     }
 
+  
     /**
      * Show the form for creating a new resource.
      */
@@ -45,11 +47,18 @@ class CatalogocuentaController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show($id)
+    public function show($n1)
     {
-        $catalogocuenta = Catalogocuenta::find($id);
 
-        return view('catalogocuenta.show', compact('catalogocuenta'));
+        $catalogocuentas = Catalogocuenta::paginate();
+
+        $cuentasSub = CatalogoCuenta::where('n1', $n1)
+                                     ->paginate();
+                            
+
+        return view('catalogocuenta.indexSub', compact('cuentasSub'))
+            ->with('i', (request()->input('page', 1) - 1) * $cuentasSub->perPage());
+
     }
 
     /**

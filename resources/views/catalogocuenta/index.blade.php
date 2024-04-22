@@ -34,13 +34,11 @@
                             <table class="table table-striped table-hover">
                                 <thead class="thead">
                                     <tr>
-                                        
 										<th>Cuenta</th>
                                         <th>Nombrecuenta</th>
                                         <th>Nivelcuenta</th>
 										<th>Ctadependiente</th>
 										<th>Movimientos</th>
-
                                         <th></th>
                                     </tr>
                                 </thead>
@@ -54,7 +52,7 @@
 											<td>{{ $catalogocuenta->movimientos }}</td>
                                             <td>
                                                 <form action="{{ route('catalogocuentas.destroy',$catalogocuenta->id) }}" method="POST">
-                                                    <a class="btn btn-sm btn-primary " href="{{ route('catalogocuentas.show',$catalogocuenta->id) }}"><i class="fa fa-fw fa-eye"></i> {{ __('Subcuentas') }}</a>
+                                                    <a class="btn btn-sm btn-primary " href="{{ route('catalogocuentas.show',$catalogocuenta->n1) }}"><i class="fa fa-fw fa-eye"></i> {{ __('Subcuentas') }}</a>
                                                     <a class="btn btn-sm btn-success" href="{{ route('catalogocuentas.edit',$catalogocuenta->id) }}"><i class="fa fa-fw fa-edit"></i> {{ __('Edit') }}</a>
                                                     @csrf
                                                     @method('DELETE')
