@@ -17,7 +17,7 @@
                             </span>
 
                              <div class="float-right">
-                                <a href="{{ route('catalogocuentas.create') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
+                                <a href="" class="btn btn-primary btn-sm float-right"  data-placement="left">
                                   {{ __('Create New') }}
                                 </a>
                               </div>
@@ -43,17 +43,17 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($cuentasSub as $cuentasSu)
+                                    @foreach ($catalogocuentas as $catalogocuenta)
                                         <tr>
-											<td>{{ $cuentasSu->n1 }}{{ $cuentasSu->n2 }}{{ $cuentasSu->n3 }}{{ $cuentasSu->n4 }}{{ $cuentasSu->n5 }}{{ $cuentasSu->n6 }}{{ $cuentasSu->n7 }}{{ $cuentasSu->n8 }}</td>
-                                            <td>{{ $cuentasSu->nombreCuenta }}</td>
-											<td>{{ $cuentasSu->nivelCuenta }}</td>
-                                            <td>{{ $cuentasSu->CTADependiente}}</td>
-											<td>{{ $cuentasSu->movimientos }}</td>
+											<td>{{ $catalogocuenta->n1 }}{{ $catalogocuenta->n2 }}{{ $catalogocuenta->n3 }}{{ $catalogocuenta->n4 }}{{ $catalogocuenta->n5 }}{{ $catalogocuenta->n6 }}{{ $catalogocuenta->n7 }}{{ $catalogocuenta->n8 }}</td>
+                                            <td>{{ $catalogocuenta->nombreCuenta }}</td>
+											<td>{{ $catalogocuenta->nivelCuenta }}</td>
+                                            <td>{{ $catalogocuenta->CTADependiente}}</td>
+											<td>{{ $catalogocuenta->movimientos }}</td>
                                             <td>
-                                                <form action="{{ route('catalogocuentas.destroy',$cuentasSu->id) }}" method="POST">
-                                                    <a class="btn btn-sm btn-primary " href="{{ route('catalogocuentas.show',$cuentasSu->id) }}"><i class="fa fa-fw fa-eye"></i> {{ __('Subcuentas') }}</a>
-                                                    <a class="btn btn-sm btn-success" href="{{ route('catalogocuentas.edit',$cuentasSu->id) }}"><i class="fa fa-fw fa-edit"></i> {{ __('Edit') }}</a>
+                                                <form action="{{ route('catalogocuentas.destroy',$catalogocuenta->id) }}" method="POST">
+                                                    <a class="btn btn-sm btn-primary " href="{{ route('subcuentas.create',$catalogocuenta->id) }}"><i class="fa fa-fw fa-eye"></i> {{ __('Crear') }}</a>
+                                                    <a class="btn btn-sm btn-success" href="{{ route('catalogocuentas.edit',$catalogocuenta->id) }}"><i class="fa fa-fw fa-edit"></i> {{ __('Edit') }}</a>
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i> {{ __('Delete') }}</button>
@@ -66,7 +66,7 @@
                         </div>
                     </div>
                 </div>
-                {!! $cuentasSub->links() !!}
+                {!! $catalogocuentas->links() !!}
             </div>
         </div>
     </div>

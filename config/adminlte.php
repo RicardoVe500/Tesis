@@ -320,8 +320,12 @@ return [
             'icon' => 'fas fa-fw fa-share',
             'submenu' => [
                 [
-                    'text' => 'Tipo Partida',
-                    'route' => 'tipopartidas.index',
+                    'text' => 'Catalogo',
+                    'route' => 'catalogocuentas.index',
+                ],
+                [
+                    'text' => 'Sub Cuentas',
+                    'url' => '#',
                 ],
                 [
                     'text' => 'level_one',

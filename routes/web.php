@@ -5,6 +5,7 @@ use App\Http\Controllers\TipopartidaController;
 use App\Http\Controllers\TipocomprobanteController;
 use App\Http\Controllers\PartidaencabezadoController;
 use App\Http\Controllers\CatalogocuentaController;
+use App\Http\Controllers\subCuentasController;
 use App\Http\Controllers\SaldoController;
 use App\Models\Saldo;
 use App\Models\Catalogocuenta;
@@ -40,6 +41,11 @@ Route::middleware('auth')->group(function () {
     Route::resource('/tipocomprobantes', TipocomprobanteController::class);
     Route::resource('/partidaencabezados', PartidaencabezadoController::class);
     Route::resource('/catalogocuentas', CatalogocuentaController::class);
+    //Route::get('/subcuentas', 'subCuentasController@index')->name('subcuentas.index');
+    Route::resource('/subcuentas', subCuentasController::class);
+
+   //Route::post('catalogocuentas/storeSub', 'CatalogocuentaController@storeSub');
+    //Route::get('catalogocuentas/createSub', 'CatalogocuentaController@createSub');
     Route::resource('/saldos', SaldoController::class);
 
 });
