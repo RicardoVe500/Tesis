@@ -16,12 +16,6 @@
                         <form method="GET" action="#" id='search-form'>
                             <input type="text" name="nombreCuenta" value="{{request('name')}}" placeholder="Busqueda">
                         </form>
-                        <form method="POST" action="{{url('/importData')}}"  role="form" enctype="multipart/form-data">
-                            @csrf
-                            <input type="file" name="file">
-                            <input type="submit" value="import">
-                        </form>
-                        
                         <span id="card_title">
                             {{ __('Catalogocuenta') }}
                         </span>
@@ -40,6 +34,13 @@
                 @endif
 
                 <div class="card-body bg-white">
+                    
+                    <form method="POST" action="{{url('/importData')}}"  role="form" enctype="multipart/form-data">
+                        @csrf
+                        <x-adminlte-input-file name="file" placeholder="Subir Archivo Excel"/>
+                        <input class="btn btn-sm btn-primary float-right" type="submit" value="import">
+                    </form>
+
                     <div class="table-responsive">
                         <table class="table table-striped table-hover">
                             <thead class="thead">
@@ -76,7 +77,7 @@
                     </div>
                 </div>
             </div>
-            {!! $catalogocuentas->appends(request()->query())->links(); !!}
+            {!! $catalogocuentas->links(); !!}
         </div>
     </div>
 </div>
