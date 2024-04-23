@@ -41,11 +41,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('/tipocomprobantes', TipocomprobanteController::class);
     Route::resource('/partidaencabezados', PartidaencabezadoController::class);
     Route::resource('/catalogocuentas', CatalogocuentaController::class);
-    //Route::get('/subcuentas', 'subCuentasController@index')->name('subcuentas.index');
-    Route::resource('/subcuentas', subCuentasController::class);
 
-   //Route::post('catalogocuentas/storeSub', 'CatalogocuentaController@storeSub');
-    //Route::get('catalogocuentas/createSub', 'CatalogocuentaController@createSub');
     Route::resource('/saldos', SaldoController::class);
 
 });

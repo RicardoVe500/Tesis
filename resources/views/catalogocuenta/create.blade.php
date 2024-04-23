@@ -15,9 +15,10 @@
                     </div>
                     <div class="card-body bg-white">
                         <form method="POST" action="{{ route('catalogocuentas.store') }}"  role="form" enctype="multipart/form-data">
+                            
                             @csrf
 
-                                 @include('catalogocuenta.form')
+                             @include('catalogocuenta.form')
                                                        
                         </form>
                     </div>

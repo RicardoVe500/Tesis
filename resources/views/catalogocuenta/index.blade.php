@@ -13,7 +13,10 @@
             <div class="card">
                 <div class="card-header">
                     <div style="display: flex; justify-content: space-between; align-items: center;">
-
+                        <form method="GET" action="#" id='search-form'>
+                            <input type="text" name="nombreCuenta" value="{{request('name')}}" placeholder="Busqueda">
+                        </form>
+                        
                         <span id="card_title">
                             {{ __('Catalogocuenta') }}
                         </span>
@@ -54,7 +57,7 @@
                                         <td>{{ $catalogocuenta->movimientos }}</td>
                                         <td>
                                             <form action="{{ route('catalogocuentas.destroy',$catalogocuenta->id) }}" method="POST">
-                                                <a class="btn btn-sm btn-primary " href="{{ route('subcuentas.index')}}"><i class="fa fa-fw fa-eye"></i> {{ __('Subcuentas') }}</a>
+                                                <a class="btn btn-sm btn-primary " href=""><i class="fa fa-fw fa-eye"></i> {{ __('Subcuentas') }}</a>
                                                 <a class="btn btn-sm btn-success" href="{{ route('catalogocuentas.edit',$catalogocuenta->id) }}"><i class="fa fa-fw fa-edit"></i> {{ __('Edit') }}</a>
                                                 @csrf
                                                 @method('DELETE')
@@ -68,7 +71,7 @@
                     </div>
                 </div>
             </div>
-            {!! $catalogocuentas->links() !!}
+            {!! $catalogocuentas->appends(request()->query())->links(); !!}
         </div>
     </div>
 </div>
@@ -81,6 +84,16 @@
 
 @section('js')
     <script> console.log("Hi, I'm using the Laravel-AdminLTE package!"); </script>
+    <script>
+        let form = document.querySelector('#search-form');
+
+        document.querySelector('input[nombreCuenta='nombreCuenta']').addEventListener('keypress', fuction(e){
+            if(e.key === 'Enter'){
+                form.Submit();
+            }
+        });
+
+    </script>
 @stop
 
 

@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\subCuentasController;
 use App\Models\Catalogocuenta;
 use App\Http\Requests\CatalogocuentaRequest;
+use App\Http\Imports\catalogoCuentasImport;
+use Illuminate\Support\Facades\DB;
 
 
 /**
@@ -17,13 +19,25 @@ class CatalogocuentaController extends Controller
      * Display a listing of the resource.
      */
     public function index()
-    {
-        $catalogocuentas = Catalogocuenta::where('nivelCuenta', 1)->paginate();
+    {   
+        $queryBuilder = Catalogocuenta::query();
+        if(request(key: 'nombreCuenta') ?? false){
+            $queryBuilder->where(column:'nombreCuenta', operator:'LIKE', value:'%'.request(key: 'nombreCuenta').'%'); 
+        }
+        
+        $catalogocuentas = $queryBuilder->paginate();
+
         return view('catalogocuenta.index', compact('catalogocuentas'))
             ->with('i', (request()->input('page', 1) - 1) * $catalogocuentas->perPage());
+
+        //$catalogocuentas = Catalogocuenta::where('nivelCuenta', 1)->paginate();
+        //return view('catalogocuenta.index', compact('catalogocuentas'))
+         //   ->with('i', (request()->input('page', 1) - 1) * $catalogocuentas->perPage());
+
+        
     }
 
-  
+   
     /**
      * Show the form for creating a new resource.
      */
@@ -31,6 +45,7 @@ class CatalogocuentaController extends Controller
     {
         $catalogocuenta = new Catalogocuenta();
         return view('catalogocuenta.create', compact('catalogocuenta'));
+        
     }
 
     /**
@@ -44,11 +59,6 @@ class CatalogocuentaController extends Controller
             ->with('success', 'Catalogocuenta created successfully.');
     }
 
-    public function show()
-    {
-        
-        
-    }
 
     /**
      * Show the form for editing the specified resource.
@@ -78,7 +88,6 @@ class CatalogocuentaController extends Controller
         return redirect()->route('catalogocuentas.index')
             ->with('success', 'Catalogocuenta deleted successfully');
     }
-
 
   
 }

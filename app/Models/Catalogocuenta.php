@@ -62,6 +62,10 @@ class Catalogocuenta extends Model
     {
         return $this->hasMany(\App\Models\Saldo::class, 'id', 'cuentaId');
     }
-    
+
+    public function scopeSearch($query, string $nombre)
+    {
+
+    }
 
 }
