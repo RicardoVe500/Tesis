@@ -2,20 +2,19 @@
 
 namespace App\Imports;
 
-use Illuminate\Support\Collection;
-use Maatwebsite\Excel\Concerns\ToCollection;
 use App\Models\Catalogocuenta;
+use Maatwebsite\Excel\Concerns\ToModel;
 
-class catalogoCuentasImport implements ToCollection
+class importCatalogo implements ToModel
 {
     /**
-    * @param Collection $collection
+    * @param array $row
+    *
+    * @return \Illuminate\Database\Eloquent\Model|null
     */
-    public function collection(Collection $collection)
+    public function model(array $row)
     {
-        foreach ($rows as $row) 
-        {
-            Catalogocuenta::create([
+        return new Catalogocuenta([
                 'n1' => $row[0],
                 'n2' => $row[1],
                 'n3' => $row[2],
@@ -29,8 +28,6 @@ class catalogoCuentasImport implements ToCollection
                 'nivelCuenta' => $row[10],
                 'nombreCuenta' => $row[11],
                 'movimientos' => $row[12],
-
-            ]);
-        }
+        ]);
     }
 }

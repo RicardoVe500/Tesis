@@ -7,6 +7,9 @@ use App\Http\Controllers\PartidaencabezadoController;
 use App\Http\Controllers\CatalogocuentaController;
 use App\Http\Controllers\subCuentasController;
 use App\Http\Controllers\SaldoController;
+use App\Http\Controllers\importarController;
+
+
 use App\Models\Saldo;
 use App\Models\Catalogocuenta;
 use App\Models\Partidaencabezado;
@@ -41,8 +44,11 @@ Route::middleware('auth')->group(function () {
     Route::resource('/tipocomprobantes', TipocomprobanteController::class);
     Route::resource('/partidaencabezados', PartidaencabezadoController::class);
     Route::resource('/catalogocuentas', CatalogocuentaController::class);
-
     Route::resource('/saldos', SaldoController::class);
+
+    Route::get('/importar', [importarController::class, 'index']);
+    Route::post('/importData', [importarController::class, 'importar']);
+
 
 });
 

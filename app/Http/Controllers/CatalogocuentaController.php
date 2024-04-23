@@ -24,7 +24,6 @@ class CatalogocuentaController extends Controller
         if(request(key: 'nombreCuenta') ?? false){
             $queryBuilder->where(column:'nombreCuenta', operator:'LIKE', value:'%'.request(key: 'nombreCuenta').'%'); 
         }
-        
         $catalogocuentas = $queryBuilder->paginate();
 
         return view('catalogocuenta.index', compact('catalogocuentas'))
@@ -33,11 +32,9 @@ class CatalogocuentaController extends Controller
         //$catalogocuentas = Catalogocuenta::where('nivelCuenta', 1)->paginate();
         //return view('catalogocuenta.index', compact('catalogocuentas'))
          //   ->with('i', (request()->input('page', 1) - 1) * $catalogocuentas->perPage());
-
-        
     }
 
-   
+    
     /**
      * Show the form for creating a new resource.
      */
