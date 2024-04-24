@@ -14,11 +14,16 @@
                         <span class="card-title">{{ __('Create') }} Catalogocuenta</span>
                     </div>
                     <div class="card-body bg-white">
-                        <form method="POST" action="{{ route('catalogocuentas.store') }}"  role="form" enctype="multipart/form-data">
+
+                        <form method="POST" action="{{url('/importData')}}"  role="form" enctype="multipart/form-data">
+
+                            <input type="file" name="file">
+                            <input type="submit" value="import">
+                            
                             
                             @csrf
 
-                             @include('catalogocuenta.form')
+                          
                                                        
                         </form>
                     </div>

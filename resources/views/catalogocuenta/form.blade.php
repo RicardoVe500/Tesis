@@ -1,6 +1,5 @@
 <div class="row padding-1 p-1">
     <div class="col-md-12">
-        
         <div class="form-group mb-2 mb20">
             <label for="n1" class="form-label">{{ __('N1') }}</label>
             <input type="text" name="n1" class="form-control @error('n1') is-invalid @enderror" value="{{ old('n1', $catalogocuenta?->n1) }}" id="n1" placeholder="N1">

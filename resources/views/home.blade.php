@@ -8,7 +8,7 @@
 
 @section('content')
     <p>Welcome to this beautiful admin panel.</p>
-<input type="date" name="" id="">
+
 @stop
 
 @section('css')
