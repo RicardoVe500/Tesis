@@ -17,7 +17,6 @@ class subCategorias extends Controller
     public function index($n1)
     {
 
-        
         $catalogocuentas = Catalogocuenta::where('n1', $n1)->paginate();
         return view('subcuentas.index', compact('catalogocuentas'))
             ->with('i', (request()->input('page', 1) - 1) * $catalogocuentas->perPage());
@@ -27,12 +26,11 @@ class subCategorias extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Request $reques, $n1)
     {
-        
         $catalogocuenta = new Catalogocuenta();
+        $catalogocuenta = Catalogocuenta::find($n1);
         return view('subcuentas.create', compact('catalogocuenta'));
-
     }
 
     /**
@@ -40,7 +38,10 @@ class subCategorias extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Catalogocuenta::create($request->validated());
+
+        return redirect()->back()
+            ->with('success', 'Catalogocuenta created successfully.');
     }
 
     /**

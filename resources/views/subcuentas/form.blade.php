@@ -2,7 +2,7 @@
     <div class="col-md-12">
         <div class="form-group mb-2 mb20">
             <label for="n1" class="form-label">{{ __('N1') }}</label>
-            <input type="text" name="n1" class="form-control @error('n1') is-invalid @enderror" value="{{ old('n1', $catalogocuenta?->n1) }}" id="n1" placeholder="N1">
+            <input type="text" name="n1" class="form-control @error('n1') is-invalid @enderror" value="{{ $catalogocuenta?->n1  }}" id="n1" placeholder="N1">
             {!! $errors->first('n1', '<div class="invalid-feedback" role="alert"><strong>:message</strong></div>') !!}
         </div>
         <div class="form-group mb-2 mb20">

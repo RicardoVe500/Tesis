@@ -84,7 +84,7 @@ class CatalogocuentaController extends Controller
     {
         Catalogocuenta::find($id)->delete();
 
-        return redirect()->route('catalogocuentas.index')
+        return redirect()->back()
             ->with('success', 'Catalogocuenta deleted successfully');
     }
 
