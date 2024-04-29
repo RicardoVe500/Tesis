@@ -25,6 +25,8 @@ class CatalogocuentaController extends Controller
             $queryBuilder->where(column:'nombreCuenta', operator:'LIKE', value:'%'.request(key: 'nombreCuenta').'%'); 
         }
         $catalogocuentas = $queryBuilder->paginate();
+        $catalogocuentas = Catalogocuenta::where('nivelCuenta', 1)->paginate();
+
 
         return view('catalogocuenta.index', compact('catalogocuentas'))
             ->with('i', (request()->input('page', 1) - 1) * $catalogocuentas->perPage());

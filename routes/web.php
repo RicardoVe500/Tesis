@@ -9,7 +9,6 @@ use App\Http\Controllers\subCuentasController;
 use App\Http\Controllers\SaldoController;
 use App\Http\Controllers\importarController;
 
-
 use App\Models\Saldo;
 use App\Models\Catalogocuenta;
 use App\Models\Partidaencabezado;

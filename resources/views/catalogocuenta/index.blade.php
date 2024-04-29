@@ -35,6 +35,7 @@
 
                 <div class="card-body bg-white">
                     
+                
                     <form method="POST" action="{{url('/importData')}}"  role="form" enctype="multipart/form-data">
                         @csrf
                         <x-adminlte-input-file name="file" placeholder="Subir Archivo Excel"/>
