@@ -2,6 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\subCuentasController;
+use App\Models\Catalogocuenta;
+use App\Http\Requests\CatalogocuentaRequest;
+use App\Http\Imports\catalogoCuentasImport;
+
 use Illuminate\Http\Request;
 
 class subCategorias extends Controller
@@ -9,9 +14,14 @@ class subCategorias extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index($n1)
     {
+
         
+        $catalogocuentas = Catalogocuenta::where('n1', $n1)->paginate();
+        return view('subcuentas.index', compact('catalogocuentas'))
+            ->with('i', (request()->input('page', 1) - 1) * $catalogocuentas->perPage());
+            
     }
 
     /**
@@ -19,7 +29,10 @@ class subCategorias extends Controller
      */
     public function create()
     {
-        //
+        
+        $catalogocuenta = new Catalogocuenta();
+        return view('subcuentas.create', compact('catalogocuenta'));
+
     }
 
     /**

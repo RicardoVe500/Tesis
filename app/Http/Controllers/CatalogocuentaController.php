@@ -20,16 +20,16 @@ class CatalogocuentaController extends Controller
      */
     public function index()
     {   
-        $queryBuilder = Catalogocuenta::query();
-        if(request(key: 'nombreCuenta') ?? false){
-            $queryBuilder->where(column:'nombreCuenta', operator:'LIKE', value:'%'.request(key: 'nombreCuenta').'%'); 
-        }
-        $catalogocuentas = $queryBuilder->paginate();
+        //$queryBuilder = Catalogocuenta::query();
+        //if(request(key: 'nombreCuenta') ?? false){
+        //    $queryBuilder->where(column:'nombreCuenta', operator:'LIKE', value:'%'.request(key: 'nombreCuenta').'%'); 
+        //}
+        //$catalogocuentas = $queryBuilder;
+
         $catalogocuentas = Catalogocuenta::where('nivelCuenta', 1)->paginate();
-
-
         return view('catalogocuenta.index', compact('catalogocuentas'))
             ->with('i', (request()->input('page', 1) - 1) * $catalogocuentas->perPage());
+            
 
         //$catalogocuentas = Catalogocuenta::where('nivelCuenta', 1)->paginate();
         //return view('catalogocuenta.index', compact('catalogocuentas'))

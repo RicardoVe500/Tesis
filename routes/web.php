@@ -8,6 +8,7 @@ use App\Http\Controllers\CatalogocuentaController;
 use App\Http\Controllers\subCuentasController;
 use App\Http\Controllers\SaldoController;
 use App\Http\Controllers\importarController;
+use App\Http\Controllers\subCategorias;
 
 use App\Models\Saldo;
 use App\Models\Catalogocuenta;
@@ -47,6 +48,11 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/importar', [importarController::class, 'index']);
     Route::post('/importData', [importarController::class, 'importar']);
+
+    Route::get('/subcuentas/{n1}', [subCategorias::class, 'index']);
+    Route::get('/subcuentas/create/{n1}', [subCategorias::class, 'create']);
+
+
 
 
 });

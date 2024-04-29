@@ -7,6 +7,7 @@
 @stop
 
 @section('content')
+
 <div class="container-fluid">
     <div class="row">
         <div class="col-sm-12">
@@ -18,7 +19,7 @@
                         </span>
 
                          <div class="float-right">
-                            <a href="{{ route('catalogocuentas.create') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
+                            <a href="{{ url('subcuentas/create',$catalogocuenta->n1) }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
                               {{ __('Create New') }}
                             </a>
                           </div>
@@ -32,13 +33,6 @@
 
                 <div class="card-body bg-white">
                     
-                
-                    <form method="POST" action="{{url('/importData')}}"  role="form" enctype="multipart/form-data">
-                        @csrf
-                        <x-adminlte-input-file name="file" placeholder="Subir Archivo Excel"/>
-                        <input class="btn btn-sm btn-primary float-right" type="submit" value="import">
-                    </form>
-
                     <div class="table-responsive">
                         <table class="table table-striped table-hover">
                             <thead class="thead">
@@ -61,7 +55,6 @@
                                         <td>{{ $catalogocuenta->movimientos }}</td>
                                         <td>
                                             <form action="{{ route('catalogocuentas.destroy',$catalogocuenta->id) }}" method="POST">
-                                                <a class="btn btn-sm btn-primary " href="{{url('/subcuentas',$catalogocuenta->n1)}}"><i class="fa fa-fw fa-eye"></i> {{ __('Subcuentas') }}</a>
                                                 <a class="btn btn-sm btn-success" href="{{route('catalogocuentas.edit',$catalogocuenta->id)}}"><i class="fa fa-fw fa-edit"></i> {{ __('Edit') }}</a>
                                                 @csrf
                                                 @method('DELETE')
@@ -79,6 +72,7 @@
         </div>
     </div>
 </div>
+
 @stop
 
 @section('css')
@@ -87,17 +81,9 @@
 @stop
 
 @section('js')
-    <script> console.log("Hi, I'm using the Laravel-AdminLTE package!"); </script>
-    <script>
-        let form = document.querySelector('#search-form');
 
-        document.querySelector('input[nombreCuenta='nombreCuenta']').addEventListener('keypress', fuction(e){
-            if(e.key === 'Enter'){
-                form.Submit();
-            }
-        });
-
-    </script>
 @stop
+
+
 
 
