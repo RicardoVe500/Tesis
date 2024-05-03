@@ -16,11 +16,8 @@
                         <span id="card_title">
                             {{ __('Catalogocuenta') }}
                         </span>
-
                          <div class="float-right">
-                            <a href="{{ route('catalogocuentas.create') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
-                              {{ __('Create New') }}
-                            </a>
+                            <a class="btn btn-sm btn-primary" data-toggle="modal" data-target="#modalPurple" class="bg-blue"><i class="fa fa-fw fa-plus"></i>{{ __('Crear cuenta')}}</a>
                           </div>
                     </div>
                 </div>
@@ -29,14 +26,12 @@
                         <p>{{ $message }}</p>
                     </div>
                 @endif
-
                 <div class="card-body bg-white">
-                    
-                
                     <form method="POST" action="{{url('/importData')}}"  role="form" enctype="multipart/form-data">
                         @csrf
                         <x-adminlte-input-file name="file" placeholder="Subir Archivo Excel"/>
-                        <input class="btn btn-sm btn-primary float-right" type="submit" value="import">
+                        <input class="btn btn-sm btn-primary float-right" class="" type="submit" value="import">
+
                     </form>
 
                     <div class="table-responsive">
@@ -62,7 +57,12 @@
                                         <td>
                                             <form action="{{ route('catalogocuentas.destroy',$catalogocuenta->id) }}" method="POST">
                                                 <a class="btn btn-sm btn-primary " href="{{url('/subcuentas',$catalogocuenta->n1)}}"><i class="fa fa-fw fa-eye"></i> {{ __('Subcuentas') }}</a>
+                                        
+                                                {{--
                                                 <a class="btn btn-sm btn-success" href="{{route('catalogocuentas.edit',$catalogocuenta->id)}}"><i class="fa fa-fw fa-edit"></i> {{ __('Edit') }}</a>
+                                                    --}}
+                                                <a href="{{route('catalogocuentas.edit',$catalogocuenta->id)}}" data-toggle="modal" data-target="#modaledit{{$catalogocuenta->id}}" class="btn btn-sm btn-success" ><i class="fa fa-fw fa-edit"></i> {{ __('Edit') }}</a>
+                                                    
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i> {{ __('Delete') }}</button>
@@ -79,6 +79,8 @@
         </div>
     </div>
 </div>
+@include('catalogocuenta.modal.form')
+@include('catalogocuenta.edit')
 @stop
 
 @section('css')

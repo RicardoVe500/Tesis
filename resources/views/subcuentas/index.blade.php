@@ -51,11 +51,19 @@
                                         <td>{{ $catalogocuenta->movimientos }}</td>
                                         <td>
                                             <form action="{{ route('catalogocuentas.destroy',$catalogocuenta->id) }}" method="POST">
-                                                <a class="btn btn-sm btn-success" href="{{url('/subcuentas-create',$catalogocuenta->n1)}}"><i class="fa fa-fw fa-edit"></i> {{ __('Edit') }}</a>
+                                                
+                                                <a class="btn btn-sm btn-primary" href="{{url('/subcuentas-create',$catalogocuenta->id)}}"><i class="fa fa-fw fa-edit"></i> {{ __('Edit') }}</a>
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i> {{ __('Delete') }}</button>
-                                            </form>
+                                               
+                                            
+                                               {{-- <a class="btn btn-sm btn-primary" href="{{url('/subcuentas-create',$catalogocuenta->id)}}" data-toggle="modal" data-target="#modalMin" wire::edit ><i class="fa fa-fw fa-edit"></i> {{ __('Edit') }}</a> 
+                                               --}}
+                                                
+                                             
+
+                                            </form> 
                                         </td>
                                     </tr>
                                 @endforeach
@@ -64,13 +72,15 @@
                     </div>
                 </div>
             </div>
+            
             {!! $catalogocuentas->links(); !!}
         </div>
     </div>
 </div>
+@include('subcuentas.modal.form')
 
 @stop
-
+                       
 @section('css')
     {{-- Add here extra stylesheets --}}
     {{-- <link rel="stylesheet" href="/css/admin_custom.css"> --}}

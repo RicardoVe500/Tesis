@@ -17,6 +17,7 @@ class subCategorias extends Controller
     public function index($n1)
     {
 
+        //codigo para filtrar las subcuentas de la cuenta.
         $catalogocuentas = Catalogocuenta::where('n1', $n1)->paginate();
         return view('subcuentas.index', compact('catalogocuentas'))
             ->with('i', (request()->input('page', 1) - 1) * $catalogocuentas->perPage());
@@ -24,13 +25,19 @@ class subCategorias extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Show the form for creating a new resource
      */
-    public function create(Request $reques, $n1)
+    public function create(Request $reques, $id)
     {
+        
+
         $catalogocuenta = new Catalogocuenta();
-        $catalogocuenta = Catalogocuenta::find($n1);
+        $catalogocuenta = Catalogocuenta::find($id);
+        //capturamos el valor de nivel de cuenta y le agregamos uno al que seleccionamos
+        $catalogocuenta->nivelCuenta = $catalogocuenta->nivelCuenta + 1;
+
         return view('subcuentas.create', compact('catalogocuenta'));
+        
     }
 
     /**

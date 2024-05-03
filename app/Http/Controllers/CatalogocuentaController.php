@@ -20,12 +20,15 @@ class CatalogocuentaController extends Controller
      */
     public function index()
     {   
+        //codigo para hacer una busqueda en la tabla principals
         //$queryBuilder = Catalogocuenta::query();
         //if(request(key: 'nombreCuenta') ?? false){
         //    $queryBuilder->where(column:'nombreCuenta', operator:'LIKE', value:'%'.request(key: 'nombreCuenta').'%'); 
         //}
         //$catalogocuentas = $queryBuilder;
 
+
+        //codigo para filtar el nivel de las cuentas y muestre solo las de nivel 1
         $catalogocuentas = Catalogocuenta::where('nivelCuenta', 1)->paginate();
         return view('catalogocuenta.index', compact('catalogocuentas'))
             ->with('i', (request()->input('page', 1) - 1) * $catalogocuentas->perPage());
@@ -54,8 +57,7 @@ class CatalogocuentaController extends Controller
     {
         Catalogocuenta::create($request->validated());
 
-        return redirect()->route('catalogocuentas.index')
-            ->with('success', 'Catalogocuenta created successfully.');
+        return back()->with('success', 'Catalogocuenta created successfully.');
     }
 
 

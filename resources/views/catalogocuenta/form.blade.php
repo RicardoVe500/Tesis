@@ -5,7 +5,10 @@
             <input type="text" name="n1" class="form-control @error('n1') is-invalid @enderror" value="{{ old('n1', $catalogocuenta?->n1) }}" id="n1" placeholder="N1">
             {!! $errors->first('n1', '<div class="invalid-feedback" role="alert"><strong>:message</strong></div>') !!}
         </div>
-        
+        <div class="form-group mb-2 mb20">
+            <label for="n2" class="form-label">{{ __('N2') }}</label>
+            <input type="text" name="n2" class="form-control" value="{{ old('n2', $catalogocuenta?->n2) }}" id="n2" placeholder="N2">     
+        </div>
         <div class="form-group mb-2 mb20">
             <label for="nivel_cuenta" class="form-label">{{ __('Nivelcuenta') }}</label>
             <input type="text" name="nivelCuenta" class="form-control @error('nivelCuenta') is-invalid @enderror" value="{{ old('nivelCuenta', $catalogocuenta?->nivelCuenta) }}" id="nivel_cuenta" placeholder="Nivelcuenta">
