@@ -1,6 +1,7 @@
 @extends('adminlte::page')
 
 @section('title', 'Dashboard')
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 @section('content_header')
     <h1>Dashboard</h1>
@@ -30,7 +31,7 @@
                     <form method="POST" action="{{url('/importData')}}"  role="form" enctype="multipart/form-data">
                         @csrf
                         <x-adminlte-input-file name="file" placeholder="Subir Archivo Excel"/>
-                        <input class="btn btn-sm btn-primary float-right" class="" type="submit" value="import">
+                        <input class="btn btn-sm btn-primary float-right" type="submit" value="import" >
 
                     </form>
 
@@ -43,7 +44,7 @@
                                     <th>Nivelcuenta</th>
                                     <th>Ctadependiente</th>
                                     <th>Movimientos</th>
-                                    <th></th>
+                                    <th>Accion</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -56,16 +57,14 @@
                                         <td>{{ $catalogocuenta->movimientos }}</td>
                                         <td>
                                             <form action="{{ route('catalogocuentas.destroy',$catalogocuenta->id) }}" method="POST">
-                                                <a class="btn btn-sm btn-primary " href="{{url('/subcuentas',$catalogocuenta->n1)}}"><i class="fa fa-fw fa-eye"></i> {{ __('Subcuentas') }}</a>
-                                        
+                                                <a class="btn btn-sm btn-primary " href="{{url('/subcuentas',$catalogocuenta->n1)}}"><i class="fas fa-layer-group"></i> {{ __('Subcuentas') }}</a>
+                                                <a href="{{route('catalogocuentas.edit',$catalogocuenta->id)}}" data-toggle="modal" data-target="#modaledit{{$catalogocuenta->id}}" class="btn btn-sm btn-success" ><i class="fa fa-fw fa-edit"></i> {{ __('Editar') }}</a>
                                                 {{--
                                                 <a class="btn btn-sm btn-success" href="{{route('catalogocuentas.edit',$catalogocuenta->id)}}"><i class="fa fa-fw fa-edit"></i> {{ __('Edit') }}</a>
                                                     --}}
-                                                <a href="{{route('catalogocuentas.edit',$catalogocuenta->id)}}" data-toggle="modal" data-target="#modaledit{{$catalogocuenta->id}}" class="btn btn-sm btn-success" ><i class="fa fa-fw fa-edit"></i> {{ __('Edit') }}</a>
-                                                    
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i> {{ __('Delete') }}</button>
+                                                <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i> {{ __('Eliminar') }}</button>
                                             </form>
                                         </td>
                                     </tr>
@@ -101,5 +100,6 @@
 
     </script>
 @stop
+
 
 

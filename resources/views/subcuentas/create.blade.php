@@ -14,7 +14,7 @@
                         <span class="card-title">{{ __('Create') }} Catalogocuenta</span>
                     </div>
                     <div class="card-body bg-white">
-                        <form method="POST" action="{{route('catalogocuentas.store', $catalogocuenta->n1)}}"  role="form" enctype="multipart/form-data">
+                        <form method="POST" action="{{route('catalogocuentas.store', $catalogocuenta->id)}}"  role="form" enctype="multipart/form-data">
                             
                             @csrf
 

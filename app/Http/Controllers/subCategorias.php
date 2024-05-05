@@ -4,10 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\subCuentasController;
 use App\Models\Catalogocuenta;
-use App\Http\Requests\CatalogocuentaRequest;
 use App\Http\Imports\catalogoCuentasImport;
-
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+use App\Http\Requests\CatalogocuentaRequest;
 
 class subCategorias extends Controller
 {
@@ -30,7 +30,6 @@ class subCategorias extends Controller
     public function create(Request $reques, $id)
     {
         
-
         $catalogocuenta = new Catalogocuenta();
         $catalogocuenta = Catalogocuenta::find($id);
         //capturamos el valor de nivel de cuenta y le agregamos uno al que seleccionamos
@@ -45,7 +44,25 @@ class subCategorias extends Controller
      */
     public function store(Request $request)
     {
-        Catalogocuenta::create($request->validated());
+        $validatedData = $request->validate([
+            'n1'=> 'nullable|string',
+            'n2'=> 'nullable|string',
+            'n3'=> 'nullable|string',
+            'n4'=> 'nullable|string',
+            'n5'=> 'nullable|string',
+            'n6'=> 'nullable|string',
+            'n7'=> 'nullable|string',
+            'n8'=> 'nullable|string',
+            'noCuenta'=> 'nullable|string',
+            'CTADependiente'=> 'nullable|string',
+            'nombreCuenta'=> 'nullable|string',
+            'movimientos'=> 'nullable|string',
+            'nivelCuenta' => 'nullable|integer', 
+            // Agrega aquí más reglas de validación según tus necesidades
+        ]);
+
+        $validatedData['nivelCuenta'] = $validatedData['nivelCuenta'] += 1;
+        Catalogocuenta::create($validatedData);
 
         return redirect()->back()
             ->with('success', 'Catalogocuenta created successfully.');

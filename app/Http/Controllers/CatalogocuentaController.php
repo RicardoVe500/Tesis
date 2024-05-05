@@ -55,8 +55,21 @@ class CatalogocuentaController extends Controller
      */
     public function store(CatalogocuentaRequest $request)
     {
-        Catalogocuenta::create($request->validated());
+        $validatedData = $request->validated();
 
+        $validatedData = $request->validate([
+            'n1'=> 'nullable|string',
+            'n2'=> 'nullable|string',
+            'CTADependiente'=> 'nullable|string',
+            'nombreCuenta'=> 'nullable|string',
+            'movimientos'=> 'nullable|string',
+            'nivelCuenta' => 'nullable|integer', 
+        ]);
+
+        $validatedData['nivelCuenta'] = $validatedData['nivelCuenta'] ?? 1;
+
+        Catalogocuenta::create($validatedData);
+        
         return back()->with('success', 'Catalogocuenta created successfully.');
     }
 

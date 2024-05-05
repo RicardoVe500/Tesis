@@ -51,18 +51,16 @@
                                         <td>{{ $catalogocuenta->movimientos }}</td>
                                         <td>
                                             <form action="{{ route('catalogocuentas.destroy',$catalogocuenta->id) }}" method="POST">
-                                                
-                                                <a class="btn btn-sm btn-primary" href="{{url('/subcuentas-create',$catalogocuenta->id)}}"><i class="fa fa-fw fa-edit"></i> {{ __('Edit') }}</a>
+                                                <a class="btn btn-sm btn-primary" href="#" data-toggle="modal"
+                                                data-target="#modalMin{{$catalogocuenta->id}}"><i class="fa fa-fw fa-edit"></i> {{ __('Crear Subcuenta') }}</a> 
+                                               {{-- <a class="btn btn-sm btn-success" href="{{url('/subcuentas-create',$catalogocuenta->id)}}"><i class="fa fa-fw fa-edit"></i> {{ __('Crear Subcuenta') }}</a>--}}
+                                               
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i> {{ __('Delete') }}</button>
                                                
                                             
-                                               {{-- <a class="btn btn-sm btn-primary" href="{{url('/subcuentas-create',$catalogocuenta->id)}}" data-toggle="modal" data-target="#modalMin" wire::edit ><i class="fa fa-fw fa-edit"></i> {{ __('Edit') }}</a> 
-                                               --}}
-                                                
-                                             
-
+                                              
                                             </form> 
                                         </td>
                                     </tr>

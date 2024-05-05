@@ -50,8 +50,10 @@ Route::middleware('auth')->group(function () {
     Route::post('/importData', [importarController::class, 'importar']);
 
     Route::get('/subcuentas/{n1}', [subCategorias::class, 'index']);
-    Route::get('/subcuentas-create/{n1}', [subCategorias::class, 'create']);
+    Route::get('/subcuentas-create/{id}', [subCategorias::class, 'create']);
+    route::resource('Subcuentas', subCategorias::class,);
 
+    
 
 });
 
