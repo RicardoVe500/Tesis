@@ -26,8 +26,10 @@ return new class extends Migration
             $table->string('CTADependiente')->nullable()->default(null);
             $table->string('nivelCuenta')->nullable();
             $table->String('nombreCuenta')->nullable();
-            $table->String('movimientos')->nullable();
+            $table->foreignId('movimientosid')->nullable();
             $table->timestamps();
+            $table->foreign('movimientosid')->references('id')->on('movimientos');
+
         });
     }
 

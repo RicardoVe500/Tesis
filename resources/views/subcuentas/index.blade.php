@@ -48,7 +48,7 @@
                                         <td>{{ $catalogocuenta->nombreCuenta }}</td>
                                         <td>{{ $catalogocuenta->nivelCuenta }}</td>
                                         <td>{{ $catalogocuenta->CTADependiente}}</td>
-                                        <td>{{ $catalogocuenta->movimientos }}</td>
+                                        <td>{{ $catalogocuenta->movimiento->movimientos }}</td>
                                         <td>
                                             <form action="{{ route('catalogocuentas.destroy',$catalogocuenta->id) }}" method="POST">
                                                 <a class="btn btn-sm btn-primary" href="#" data-toggle="modal"

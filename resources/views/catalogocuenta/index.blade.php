@@ -42,7 +42,6 @@
                                     <th>Cuenta</th>
                                     <th>Nombrecuenta</th>
                                     <th>Nivelcuenta</th>
-                                    <th>Ctadependiente</th>
                                     <th>Movimientos</th>
                                     <th>Accion</th>
                                 </tr>
@@ -53,8 +52,7 @@
                                         <td>{{ $catalogocuenta->n1 }}{{ $catalogocuenta->n2 }}{{ $catalogocuenta->n3 }}{{ $catalogocuenta->n4 }}{{ $catalogocuenta->n5 }}{{ $catalogocuenta->n6 }}{{ $catalogocuenta->n7 }}{{ $catalogocuenta->n8 }}</td>
                                         <td>{{ $catalogocuenta->nombreCuenta }}</td>
                                         <td>{{ $catalogocuenta->nivelCuenta }}</td>
-                                        <td>{{ $catalogocuenta->CTADependiente}}</td>
-                                        <td>{{ $catalogocuenta->movimientos }}</td>
+                                        <td>{{ $catalogocuenta->movimiento->movimientos}}</td>
                                         <td>
                                             <form action="{{ route('catalogocuentas.destroy',$catalogocuenta->id) }}" method="POST">
                                                 <a class="btn btn-sm btn-primary " href="{{url('/subcuentas',$catalogocuenta->n1)}}"><i class="fas fa-layer-group"></i> {{ __('Subcuentas') }}</a>
@@ -90,14 +88,15 @@
 @section('js')
     <script> console.log("Hi, I'm using the Laravel-AdminLTE package!"); </script>
     <script>
-        let form = document.querySelector('#search-form');
-
-        document.querySelector('input[nombreCuenta='nombreCuenta']').addEventListener('keypress', fuction(e){
-            if(e.key === 'Enter'){
-                form.Submit();
-            }
+      // Esperar a que el documento esté listo
+    $(document).ready(function() {
+        // Agregar un evento cuando el modal se oculta
+        $('#modalPurple').on('hidden.bs.modal', function (e) {
+            // Limpiar el contenido de los inputs dentro del modal específico
+            $('#modalPurple input[type="text"]').val('');
+            $('#modalPurple select[name="movimientos"]').val('');
         });
-
+    });
     </script>
 @stop
 

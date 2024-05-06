@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('catalogo_sucursal', function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->id();
-            $table->string('sucursalId');
-            $table->string('cuentaId');
+            $table->foreignId('sucursalId');
+            $table->foreignId('cuentaId');
             $table->timestamps();
             $table->foreign('sucursalId')->references('id')->on('sucursal');
             $table->foreign('cuentaId')->references('id')->on('catalogocuentas');

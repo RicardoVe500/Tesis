@@ -3,7 +3,9 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Movimiento;
 use NullableFields;
+
 /**
  * Class Catalogocuenta
  *
@@ -20,10 +22,12 @@ use NullableFields;
  * @property $CTADependiente
  * @property $nivelCuenta
  * @property $nombreCuenta
- * @property $movimientos
+ * @property $movimientosid
  * @property $created_at
  * @property $updated_at
  *
+ * @property Movimiento $movimiento
+ * @property CatalogoSucursal[] $catalogoSucursals
  * @property Partidadetalle[] $partidadetalles
  * @property Saldo[] $saldos
  * @package App
@@ -32,9 +36,7 @@ use NullableFields;
 class Catalogocuenta extends Model
 {
     
-    
-    
-    
+
     protected $perPage = 20;
 
     /**
@@ -44,9 +46,25 @@ class Catalogocuenta extends Model
      */
     protected $table = 'catalogocuentas';
     protected $nullable = '*';
-    protected $fillable = ['n1', 'n2', 'n3', 'n4', 'n5', 'n6', 'n7', 'n8', 'noCuenta', 'CTADependiente', 'nivelCuenta', 'nombreCuenta', 'movimientos'];
+    protected $fillable = ['n1', 'n2', 'n3', 'n4', 'n5', 'n6', 'n7', 'n8', 'noCuenta', 'CTADependiente', 'nivelCuenta', 'nombreCuenta', 'movimientosid'];
 
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function movimiento()
+    {
+        return $this->belongsTo(\App\Models\Movimiento::class, 'movimientosid', 'id');
+    }
+    
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function catalogoSucursals()
+    {
+        return $this->hasMany(\App\Models\CatalogoSucursal::class, 'id', 'cuentaId');
+    }
+    
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
@@ -62,10 +80,6 @@ class Catalogocuenta extends Model
     {
         return $this->hasMany(\App\Models\Saldo::class, 'id', 'cuentaId');
     }
-
-    public function scopeSearch($query, string $nombre)
-    {
-
-    }
+    
 
 }

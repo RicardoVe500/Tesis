@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('sucursal', function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->id();
-            $table->string('empresaId');
-            $table->string('encargadoId');
+            $table->foreignId('empresaId');
+            $table->foreignId('encargadoId');
             $table->string('nombre');
             $table->string('direccion');
             $table->string('correo');

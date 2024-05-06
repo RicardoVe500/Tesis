@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('movimientos', function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->id();
-            $table->string('moviminetos');
+            $table->string('movimientos');
             $table->timestamps();
         });
     }

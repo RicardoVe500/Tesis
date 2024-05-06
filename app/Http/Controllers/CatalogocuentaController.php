@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\subCuentasController;
 use App\Models\Catalogocuenta;
+
+use App\Models\Movimiento;
+use App\Http\Controllers\MovimientoController;
+
 use App\Http\Requests\CatalogocuentaRequest;
 use App\Http\Imports\catalogoCuentasImport;
 use Illuminate\Support\Facades\DB;
@@ -29,8 +33,9 @@ class CatalogocuentaController extends Controller
 
 
         //codigo para filtar el nivel de las cuentas y muestre solo las de nivel 1
+        $movimientos = Movimiento::all();
         $catalogocuentas = Catalogocuenta::where('nivelCuenta', 1)->paginate();
-        return view('catalogocuenta.index', compact('catalogocuentas'))
+        return view('catalogocuenta.index', compact('catalogocuentas','movimientos'))
             ->with('i', (request()->input('page', 1) - 1) * $catalogocuentas->perPage());
             
 
@@ -45,8 +50,9 @@ class CatalogocuentaController extends Controller
      */
     public function create()
     {
+        $movimientos = Movimiento::all();
         $catalogocuenta = new Catalogocuenta();
-        return view('catalogocuenta.create', compact('catalogocuenta'));
+        return view('catalogocuenta.create', compact('catalogocuenta','movimientos'));
         
     }
 
@@ -55,6 +61,8 @@ class CatalogocuentaController extends Controller
      */
     public function store(CatalogocuentaRequest $request)
     {
+        $movimientos = Movimiento::all();
+
         $validatedData = $request->validated();
 
         $validatedData = $request->validate([
@@ -62,7 +70,7 @@ class CatalogocuentaController extends Controller
             'n2'=> 'nullable|string',
             'CTADependiente'=> 'nullable|string',
             'nombreCuenta'=> 'nullable|string',
-            'movimientos'=> 'nullable|string',
+            'movimientosid'=> 'nullable|string',
             'nivelCuenta' => 'nullable|integer', 
         ]);
 
@@ -79,9 +87,9 @@ class CatalogocuentaController extends Controller
      */
     public function edit($id)
     {
+        $movimientos = Movimiento::all();
         $catalogocuenta = Catalogocuenta::find($id);
-
-        return view('catalogocuenta.edit', compact('catalogocuenta'));
+        return view('catalogocuenta.edit', compact('catalogocuenta', 'movimientos'));
     }
 
     /**

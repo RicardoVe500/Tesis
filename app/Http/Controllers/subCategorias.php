@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\subCuentasController;
 use App\Models\Catalogocuenta;
 use App\Http\Imports\catalogoCuentasImport;
+use App\Models\Movimiento;
+use App\Http\Controllers\MovimientoController;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Http\Requests\CatalogocuentaRequest;
@@ -18,8 +20,9 @@ class subCategorias extends Controller
     {
 
         //codigo para filtrar las subcuentas de la cuenta.
+        $movimientos = Movimiento::all();
         $catalogocuentas = Catalogocuenta::where('n1', $n1)->paginate();
-        return view('subcuentas.index', compact('catalogocuentas'))
+        return view('subcuentas.index', compact('catalogocuentas', 'movimientos'))
             ->with('i', (request()->input('page', 1) - 1) * $catalogocuentas->perPage());
             
     }
@@ -44,6 +47,7 @@ class subCategorias extends Controller
      */
     public function store(Request $request)
     {
+        //se establecen reglas de validacion de los campos.
         $validatedData = $request->validate([
             'n1'=> 'nullable|string',
             'n2'=> 'nullable|string',
@@ -56,12 +60,23 @@ class subCategorias extends Controller
             'noCuenta'=> 'nullable|string',
             'CTADependiente'=> 'nullable|string',
             'nombreCuenta'=> 'nullable|string',
-            'movimientos'=> 'nullable|string',
+            'movimientosid'=> 'nullable|string',
             'nivelCuenta' => 'nullable|integer', 
-            // Agrega aquí más reglas de validación según tus necesidades
+            
         ]);
-
+        
+        //se concatenan los datos optenidos de los campos n1 a n8.
+        $concatenado = $validatedData['n1'].$validatedData['n2'].$validatedData['n3'].$validatedData['n4'].
+        $validatedData['n5'].$validatedData['n6'].$validatedData['n7'].$validatedData['n8'];
+        //se captura el dato de nivel de cuenta y se le suma 1.
         $validatedData['nivelCuenta'] = $validatedData['nivelCuenta'] += 1;
+        //una ves concatenado los campos de n1 a n8 se le quitan los ultimos 2 digitos para crear 
+        //el numero de la cuenta en la cual este depende.
+        $CTADependiente = substr($concatenado, 0, -2);
+
+        $validatedData['noCuenta'] = $concatenado;
+        $validatedData['CTADependiente'] = $CTADependiente;
+
         Catalogocuenta::create($validatedData);
 
         return redirect()->back()

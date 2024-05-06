@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('encargadoSucursal', function (Blueprint $table) {
             $table->engine = 'InnoDB';
             $table->id();
-            $table->string('usuarioId');
+            $table->foreignId('usuarioId');
             $table->timestamps();
             $table->foreign('usuarioId')->references('id')->on('users');
         });
