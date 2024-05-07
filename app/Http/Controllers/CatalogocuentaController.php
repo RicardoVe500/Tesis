@@ -99,8 +99,7 @@ class CatalogocuentaController extends Controller
     {
         $catalogocuenta->update($request->validated());
 
-        return redirect()->route('catalogocuentas.index')
-            ->with('success', 'Catalogocuenta updated successfully');
+        return back()->with('success', 'Catalogocuenta updated successfully');
     }
 
     public function destroy($id)

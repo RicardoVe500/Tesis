@@ -18,13 +18,11 @@ class subCategorias extends Controller
      */
     public function index($n1)
     {
-
         //codigo para filtrar las subcuentas de la cuenta.
         $movimientos = Movimiento::all();
-        $catalogocuentas = Catalogocuenta::where('n1', $n1)->paginate();
+        $catalogocuentas = Catalogocuenta::where('n1', $n1)->orderBy('nivelCuenta', 'asc')->paginate();
         return view('subcuentas.index', compact('catalogocuentas', 'movimientos'))
             ->with('i', (request()->input('page', 1) - 1) * $catalogocuentas->perPage());
-            
     }
 
     /**
@@ -84,28 +82,44 @@ class subCategorias extends Controller
     }
 
     /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
      * Show the form for editing the specified resource.
      */
     public function edit(string $id)
     {
-        //
+        $movimientos = Movimiento::all();
+        $catalogocuenta = Catalogocuenta::find($id);
+        return view('catalogocuenta.edit', compact('catalogocuenta', 'movimientos'));
+        
     }
 
     /**
      * Update the specified resource in storage.
      */
     public function update(Request $request, string $id)
-    {
-        //
+    {  
+        
+        $catalogocuenta = Catalogocuenta::findOrFail($id);
+
+        $validatedData = $request->validate([
+            'movimientosid' => 'required|numeric',
+            // Agrega otras reglas de validación según sea necesario
+        ]);
+        
+        try {
+            // Actualiza los atributos del Catalogocuenta con los datos validados
+            $catalogocuenta->update($validatedData);
+    
+            return back()->with('success', 'Catalogocuenta updated successfully');
+
+        } catch (\Exception $e) {
+
+            // Maneja cualquier error que ocurra durante la actualización
+            return redirect()->back()
+                             ->with('error', 'Error updating Catalogocuenta: ' . $e->getMessage());
+
+        return back()->with('success', 'Catalogocuenta updated successfully');
     }
+ }
 
     /**
      * Remove the specified resource from storage.

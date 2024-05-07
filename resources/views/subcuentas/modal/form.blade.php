@@ -74,6 +74,7 @@
                     </div>
                     <div class="col">
                         <div class="form-group mb-2 mb20">
+                            
                         <label for="mov" class="form-label">{{ __('Movimientos') }}</label>
                             <select name="movimientosid" class="form-control @error('movimientosid') is-invalid @enderror"  id="movimientosid">
                                 <option value="">--seleccionar--</option>
@@ -81,6 +82,7 @@
                                 <option value="{{ old('movimientosid', $movimiento?->id)}}">{{$movimiento['movimientos']}}</option>
                                 @endforeach
                             </select>
+        
                             
                         </div>
                     </div>

@@ -52,7 +52,7 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/subcuentas/{n1}', [subCategorias::class, 'index']);
     Route::get('/subcuentas-create/{id}', [subCategorias::class, 'create']);
-    route::resource('Subcuentas', subCategorias::class,);
+    route::resource('Subcuentas', subCategorias::class);
 
     
 

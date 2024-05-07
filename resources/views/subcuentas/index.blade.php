@@ -53,9 +53,12 @@
                                             <form action="{{ route('catalogocuentas.destroy',$catalogocuenta->id) }}" method="POST">
                                                 <a class="btn btn-sm btn-primary" href="#" data-toggle="modal"
                                                 data-target="#modalMin{{$catalogocuenta->id}}"><i class="fa fa-fw fa-edit"></i> {{ __('Crear Subcuenta') }}</a> 
+                                                <a href="{{route('catalogocuentas.edit',$catalogocuenta->id)}}" data-toggle="modal" data-target="#modaledit{{$catalogocuenta->id}}" class="btn btn-sm btn-success" ><i class="fa fa-fw fa-edit"></i> {{ __('Editar') }}</a>
                                                {{-- <a class="btn btn-sm btn-success" href="{{url('/subcuentas-create',$catalogocuenta->id)}}"><i class="fa fa-fw fa-edit"></i> {{ __('Crear Subcuenta') }}</a>--}}
                                                
                                                 @csrf
+
+
                                                 @method('DELETE')
                                                 <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i> {{ __('Delete') }}</button>
                                                
@@ -76,6 +79,8 @@
     </div>
 </div>
 @include('subcuentas.modal.form')
+@include('subcuentas.edit')
+
 
 @stop
                        
@@ -85,6 +90,8 @@
 @stop
 
 @section('js')
+
+
 
 @stop
 
