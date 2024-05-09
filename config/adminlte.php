@@ -316,15 +316,16 @@ return [
             'can' => 'manage-blog',
         ],
         [
-            'text' => 'Catalogo de cuentas',
-            'icon' => 'fas fa-fw fa-share',
+            'text' => 'Catalogo',
+            'route' => 'catalogocuentas.index',
+            'icon' => 'fas fa-layer-group',
+        ],
+        [
+            'text' => 'Partidas',
+            'icon' => 'fas fa-file-invoice-dollar',
             'submenu' => [
                 [
-                    'text' => 'Catalogo',
-                    'route' => 'catalogocuentas.index',
-                ],
-                [
-                    'text' => 'Sub Cuentas',
+                    'text' => 'nada',
                     'url' => '#',
                 ],
                 [

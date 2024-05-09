@@ -10,6 +10,8 @@ use App\Http\Controllers\MovimientoController;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Http\Requests\CatalogocuentaRequest;
+use Barryvdh\DomPDF\Facade\Pdf;
+
 
 class subCategorias extends Controller
 {
@@ -23,6 +25,7 @@ class subCategorias extends Controller
         $catalogocuentas = Catalogocuenta::where('n1', $n1)->orderBy('nivelCuenta', 'asc')->paginate();
         return view('subcuentas.index', compact('catalogocuentas', 'movimientos'))
             ->with('i', (request()->input('page', 1) - 1) * $catalogocuentas->perPage());
+
     }
 
     /**
@@ -45,6 +48,7 @@ class subCategorias extends Controller
      */
     public function store(Request $request)
     {
+      
         //se establecen reglas de validacion de los campos.
         $validatedData = $request->validate([
             'n1'=> 'nullable|string',
@@ -62,6 +66,10 @@ class subCategorias extends Controller
             'nivelCuenta' => 'nullable|integer', 
             
         ]);
+
+        if (empty($validatedData['movimientosid'])) {
+            $validatedData['movimientosid'] = 2;
+        }
         
         //se concatenan los datos optenidos de los campos n1 a n8.
         $concatenado = $validatedData['n1'].$validatedData['n2'].$validatedData['n3'].$validatedData['n4'].
@@ -101,15 +109,30 @@ class subCategorias extends Controller
         $catalogocuenta = Catalogocuenta::findOrFail($id);
 
         $validatedData = $request->validate([
-            'movimientosid' => 'required|numeric',
-            // Agrega otras reglas de validación según sea necesario
+            'n1'=> 'nullable|string',
+            'n2'=> 'nullable|string',
+            'n3'=> 'nullable|string',
+            'n4'=> 'nullable|string',
+            'n5'=> 'nullable|string',
+            'n6'=> 'nullable|string',
+            'n7'=> 'nullable|string',
+            'n8'=> 'nullable|string',
+            'noCuenta'=> 'nullable|string',
+            'CTADependiente'=> 'nullable|string',
+            'nombreCuenta'=> 'nullable|string',
+            'movimientosid' => 'nullable|numeric',
+            'nivelCuenta' => 'nullable|integer'
         ]);
+
+        if (empty($validatedData['movimientosid'])) {
+            $validatedData['movimientosid'] = 2;
+        }
         
         try {
             // Actualiza los atributos del Catalogocuenta con los datos validados
             $catalogocuenta->update($validatedData);
     
-            return back()->with('success', 'Catalogocuenta updated successfully');
+            return back()->with('success', 'Catalogocuenta modificado');
 
         } catch (\Exception $e) {
 
@@ -117,9 +140,10 @@ class subCategorias extends Controller
             return redirect()->back()
                              ->with('error', 'Error updating Catalogocuenta: ' . $e->getMessage());
 
-        return back()->with('success', 'Catalogocuenta updated successfully');
+        return back()->with('success', 'Catalogocuenta modificado');
     }
  }
+ 
 
     /**
      * Remove the specified resource from storage.
@@ -128,4 +152,12 @@ class subCategorias extends Controller
     {
         //
     }
+    public function reportecategoria()
+    {
+        $catalogocuentas = Catalogocuenta::orderBy('id', 'asc')->get();
+        $pdf = Pdf::loadView('catalogocuenta.report', compact('catalogocuentas'));
+        return $pdf->stream('Catalogo.pdf');
+
+    }
+
 }

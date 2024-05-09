@@ -1,6 +1,6 @@
 {{-- Este es el formulario de agregar nuevas Subcuentas --}}
 @foreach ($catalogocuentas as $catalogocuenta)
-    <x-adminlte-modal id="modalMin{{ $catalogocuenta->id }}" title="Crear Subcuenta" size='lg'>
+    <x-adminlte-modal id="modalMin{{ $catalogocuenta->id }}" title="Crear Subcuenta" size='lg' theme='blue'>
         @csrf
         <form method="POST" action="{{ route('Subcuentas.store', $catalogocuenta->id) }}" tabindex="-1" role="form"
             enctype="multipart/form-data">
@@ -79,7 +79,7 @@
                             <select name="movimientosid" class="form-control @error('movimientosid') is-invalid @enderror"  id="movimientosid">
                                 <option value="">--seleccionar--</option>
                                 @foreach ($movimientos as $movimiento)
-                                <option value="{{ old('movimientosid', $movimiento?->id)}}">{{$movimiento['movimientos']}}</option>
+                                <option value="{{ old('movimientosid', $movimiento?->id)}}" >{{$movimiento['movimientos']}}</option>
                                 @endforeach
                             </select>
         

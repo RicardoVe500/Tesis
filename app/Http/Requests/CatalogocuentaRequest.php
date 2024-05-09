@@ -34,7 +34,7 @@ class CatalogocuentaRequest extends FormRequest
 			'CTADependiente' => 'string|nullable',
 			'nivelCuenta' => 'string',
 			'nombreCuenta' => 'string',
-			'movimientos' => 'string',
+			'movimientosid' => 'string|nullable',
         ];
     }
 }

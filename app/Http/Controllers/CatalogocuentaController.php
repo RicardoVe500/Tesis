@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\subCuentasController;
 use App\Models\Catalogocuenta;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 use App\Models\Movimiento;
 use App\Http\Controllers\MovimientoController;
@@ -108,6 +109,14 @@ class CatalogocuentaController extends Controller
 
         return redirect()->back()
             ->with('success', 'Catalogocuenta deleted successfully');
+    }
+
+    public function reportecategoria()
+    {
+        $catalogocuentas = Catalogocuenta::orderBy('id', 'asc')->get();
+        $pdf = Pdf::loadView('catalogocuenta.report', compact('catalogocuentas'));
+        return $pdf->stream('Catalogo.pdf');
+
     }
 
   

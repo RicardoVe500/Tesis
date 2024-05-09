@@ -51,6 +51,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/importData', [importarController::class, 'importar']);
 
     Route::get('/subcuentas/{n1}', [subCategorias::class, 'index']);
+    Route::get('/reporteCuentas', [subCategorias::class, 'reportecategoria'])->name('catalogocuenta.report');
     Route::get('/subcuentas-create/{id}', [subCategorias::class, 'create']);
     route::resource('Subcuentas', subCategorias::class);
 
